@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#020507">
+  <title>My School Projects</title>
+
+  <style>
+    :root {
+      --background: #020507;
+      --surface: #05090c;
+      --blue: #00aaff;
+      --text-muted: #aab5bc;
+      --nav-height: 60px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: var(--nav-height);
+    }
+
+    body {
+      background: var(--background);
+      color: #fff;
+      font-family: Arial, sans-serif;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    nav {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 1000;
+      min-height: var(--nav-height);
+      padding: 18px 8%;
+      text-align: right;
+      background: rgba(0, 5, 10, 0.96);
+      border-bottom: 1px solid var(--blue);
+      box-shadow: 0 0 15px #008cff66;
+    }
+
+    nav a {
+      display: inline-block;
+      margin-left: 28px;
+      color: var(--blue);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    nav a:hover,
+    nav a:focus-visible {
+      color: #fff;
+      text-shadow: 0 0 15px var(--blue);
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 8% 80px;
+      background:
+        radial-gradient(circle at 75% 40%, #0066aa55, transparent 30%),
+        radial-gradient(circle at 20% 80%, #003b6355, transparent 30%),
+        var(--background);
+    }
+
+    .hero-content {
+      max-width: 900px;
+    }
+
+    .tag,
+    .label {
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 3px;
+    }
+
+    .hero h1 {
+      margin: 25px 0;
+      font-size: clamp(3.5rem, 9vw, 7.5rem);
+      line-height: 0.9;
+      letter-spacing: -5px;
+      text-shadow: 0 0 10px var(--blue), 0 0 35px #008cff;
+    }
+
+    .hero h1 span,
+    h2 span {
+      color: var(--blue);
+    }
+
+    .hero p {
+      margin-bottom: 35px;
+      color: var(--text-muted);
+      font-size: 19px;
+      line-height: 1.6;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 13px 20px;
+      border: 1px solid var(--blue);
+      color: var(--blue);
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: bold;
+      transition: 0.2s ease;
+    }
+
+    .button:hover,
+    .button:focus-visible {
+      background: var(--blue);
+      color: #000;
+      box-shadow: 0 0 25px var(--blue);
+    }
+
+    section:not(.hero) {
+      padding: 110px 8%;
+      scroll-margin-top: var(--nav-height);
+    }
+
+    h2 {
+      margin: 15px 0 50px;
+      font-size: clamp(2.5rem, 6vw, 4.7rem);
+    }
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 25px;
+    }
+
+    .card {
+      grid-column: span 4;
+      min-width: 0;
+      overflow: hidden;
+      background: var(--surface);
+      border: 1px solid #008cff55;
+      transition: 0.25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: var(--blue);
+      box-shadow: 0 0 30px #008cff33;
+    }
+
+    .card.large {
+      grid-column: span 8;
+    }
+
+    .media {
+      position: relative;
+      height: 230px;
+      overflow: hidden;
+      background: #06111a;
+    }
+
+    .burger {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      padding: 15px;
+      background: linear-gradient(135deg, #092234, #010609);
+    }
+
+    .burger .emoji {
+      font-size: 75px;
+    }
+
+    .burger strong {
+      font-size: 24px;
+    }
+
+    .design {
+      display: grid;
+      place-items: center;
+      text-align: center;
+      background: repeating-linear-gradient(
+        45deg,
+        #06131c,
+        #06131c 25px,
+        #0a2635 26px,
+        #06131c 27px
+      );
+    }
+
+    .design strong {
+      font-size: 43px;
+      line-height: 0.9;
+    }
+
+    .design span {
+      color: var(--blue);
+    }
+
+    .youtube a {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .youtube img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .play {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      display: grid;
+      width: 75px;
+      height: 75px;
+      place-items: center;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: var(--blue);
+      color: #001018;
+      font-size: 25px;
+      box-shadow: 0 0 35px var(--blue);
+    }
+
+    .media video {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .empty {
+      display: grid;
+      place-items: center;
+      color: var(--blue);
+      font-size: 90px;
+    }
+
+    .content {
+      padding: 25px;
+    }
+
+    .project-number {
+      color: var(--blue);
+      font-size: 10px;
+      font-weight: bold;
+      letter-spacing: 3px;
+    }
+
+    .content h3 {
+      margin: 10px 0;
+      font-size: 23px;
+    }
+
+    .content p {
+      margin-bottom: 20px;
+      color: #8e9aa3;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .about-box {
+      display: flex;
+      align-items: center;
+      gap: 45px;
+      max-width: 1000px;
+      padding: 45px;
+      border: 1px solid #00aaff55;
+    }
+
+    .about-number {
+      color: var(--blue);
+      font-size: 80px;
+      font-weight: bold;
+      text-shadow: 0 0 25px var(--blue);
+    }
+
+    .about-box p {
+      color: var(--text-muted);
+      font-size: 18px;
+      line-height: 1.8;
+    }
+
+    .team {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .member {
+      padding: 30px 15px;
+      text-align: center;
+      background: var(--surface);
+      border: 1px solid #008cff55;
+      transition: 0.2s ease;
+    }
+
+    .member:hover {
+      transform: translateY(-5px);
+      border-color: var(--blue);
+      box-shadow: 0 0 25px #008cff33;
+    }
+
+    .avatar {
+      display: grid;
+      width: 65px;
+      height: 65px;
+      margin: 0 auto 18px;
+      place-items: center;
+      border: 1px solid var(--blue);
+      border-radius: 50%;
+      color: var(--blue);
+      font-size: 25px;
+      font-weight: bold;
+      box-shadow: 0 0 20px #00aaff44;
+    }
+
+    .member h3 {
+      margin-bottom: 10px;
+      font-size: 15px;
+      overflow-wrap: anywhere;
+    }
+
+    .member p {
+      color: var(--blue);
+      font-size: 9px;
+      letter-spacing: 2px;
+    }
+
+    footer {
+      padding: 40px 20px;
+      text-align: center;
+      border-top: 1px solid #008cff55;
+      color: var(--blue);
+    }
+
+    @media (max-width: 900px) {
+      .card,
+      .card.large {
+        grid-column: span 6;
+      }
+
+      .team {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 600px) {
+      nav {
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+        padding: 15px 8px;
+      }
+
+      nav a {
+        margin: 0;
+        font-size: 10px;
+      }
+
+      .hero h1 {
+        letter-spacing: -3px;
+      }
+
+      section:not(.hero) {
+        padding: 80px 6%;
+      }
+
+      .projects {
+        grid-template-columns: 1fr;
+      }
+
+      .card,
+      .card.large {
+        grid-column: 1;
+      }
+
+      .team {
+        grid-template-columns: 1fr;
+      }
+
+      .about-box {
+        display: block;
+        padding: 30px;
+      }
+
+      .about-number {
+        margin-bottom: 20px;
+      }
+
+      .burger {
+        gap: 12px;
+      }
+
+      .burger .emoji {
+        font-size: 55px;
+      }
+
+      .burger strong {
+        font-size: 19px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav aria-label="Main navigation">
+    <a href="#home">HOME</a>
+    <a href="#projects">PROJECTS</a>
+    <a href="#about">ABOUT</a>
+    <a href="#team">TEAM</a>
+  </nav>
+
+  <main>
+    <section id="home" class="hero">
+      <div class="hero-content">
+        <div class="tag">SCHOOL PROJECT PORTFOLIO</div>
+        <h1>MY SCHOOL<br><span>PROJECTS</span></h1>
+        <p>A collection of projects created during the school year.</p>
+        <a href="#projects" class="button">EXPLORE PROJECTS ↓</a>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="label">01 / PROJECTS</div>
+      <h2>OUR <span>WORK</span></h2>
+
+      <div class="projects">
+        <article class="card">
+          <div class="media burger">
+            <div class="emoji" aria-hidden="true">🍔</div>
+            <strong>SANJI'S<br>YUM YUM BURGER</strong>
+          </div>
+          <div class="content">
+            <div class="project-number">PROJECT 01</div>
+            <h3>Sanji's Yum Yum Burger</h3>
+            <p>A creative burger advertisement inspired by Sanji from One Piece.</p>
+            <a href="sanji-burger.pdf" target="_blank" rel="noopener noreferrer" class="button">VIEW PROJECT ↗</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="media design">
+            <strong>UNTITLED<br><span>DESIGN</span></strong>
+          </div>
+          <div class="content">
+            <div class="project-number">PROJECT 02</div>
+            <h3>Untitled Design</h3>
+            <p>A creative visual design project created during the school year.</p>
+            <a href="untitled-design.pdf" target="_blank" rel="noopener noreferrer" class="button">VIEW PROJECT ↗</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="media youtube">
+            <a href="https://www.youtube.com/watch?v=PyQ81blsi9A" target="_blank" rel="noopener noreferrer" aria-label="Watch the video project on YouTube">
+              <img
+                src="https://img.youtube.com/vi/PyQ81blsi9A/hqdefault.jpg"
+                alt="Video project thumbnail"
+                loading="lazy"
+              >
+              <span class="play" aria-hidden="true">▶</span>
+            </a>
+          </div>
+          <div class="content">
+            <div class="project-number">PROJECT 03</div>
+            <h3>Video Project</h3>
+            <p>A video project created as part of our school activities.</p>
+            <a href="https://www.youtube.com/watch?v=PyQ81blsi9A" target="_blank" rel="noopener noreferrer" class="button">WATCH VIDEO ↗</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="media empty" aria-hidden="true">+</div>
+          <div class="content">
+            <div class="project-number">PROJECT 04</div>
+            <h3>More Projects</h3>
+            <p>More school projects and activities can be added here.</p>
+          </div>
+        </article>
+
+        <article class="card large">
+          <div class="media">
+            <video controls preload="metadata">
+              <source src="last-project.mp4" type="video/mp4">
+              Your browser does not support video playback.
+            </video>
+          </div>
+          <div class="content">
+            <div class="project-number">PROJECT 05 / LATEST</div>
+            <h3>Final School Project</h3>
+            <p>Our latest school project video.</p>
+            <a href="last-project.mp4" target="_blank" rel="noopener noreferrer" class="button">OPEN VIDEO ↗</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="label">02 / ABOUT</div>
+      <h2>THE <span>PORTFOLIO</span></h2>
+      <div class="about-box">
+        <div class="about-number" aria-hidden="true">01</div>
+        <p>
+          This website contains a collection of our school projects created
+          during the school year. It includes designs, advertisements, videos,
+          and other multimedia projects created by our group.
+        </p>
+      </div>
+    </section>
+
+    <section id="team">
+      <div class="label">03 / TEAM</div>
+      <h2>MEET THE <span>TEAM</span></h2>
+      <div class="team">
+        <article class="member">
+          <div class="avatar" aria-hidden="true">C</div>
+          <h3>Castiel Francis O. Jarina</h3>
+          <p>GROUP LEADER</p>
+        </article>
+        <article class="member">
+          <div class="avatar" aria-hidden="true">B</div>
+          <h3>Ben Jason T. Dejino</h3>
+          <p>PROJECT GATHERER</p>
+        </article>
+        <article class="member">
+          <div class="avatar" aria-hidden="true">A</div>
+          <h3>Adolf Ace E. Gilay</h3>
+          <p>CODER</p>
+        </article>
+        <article class="member">
+          <div class="avatar" aria-hidden="true">Z</div>
+          <h3>Zegfroyd Joseph A. Sebucao</h3>
+          <p>PLANNER</p>
+        </article>
+        <article class="member">
+          <div class="avatar" aria-hidden="true">T</div>
+          <h3>Theofranz L. Calunsag Jr.</h3>
+          <p>DESIGNER</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>MY SCHOOL PROJECTS — © 2026 Castiel &amp; Team</footer>
+</body>
+</html>
